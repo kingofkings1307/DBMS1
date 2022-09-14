@@ -1,0 +1,182 @@
+mysql> create table db.department(deptno int(4),deptname varchar(10),deptlocation varchar(10));
+Query OK, 0 rows affected, 1 warning (0.04 sec)
+
+mysql> select * from db.department;
+Empty set (0.00 sec)
+
+mysql> insert into db.department values(111,'hlo','bkm street');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from db.department;
++--------+----------+--------------+
+| d
+|    111 | hlo      | bkm street   |
++--------+----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> create table db.employee2(empno int(3),ename char(10),job char(10),deptno int(5),sal float(7,2));
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> insert into db.employee2 values(112,'mohan','manager',"192125","10000");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from db.employee2;
++-------+-------+---------+--------+----------+
+| empno | ename | job     | deptno | sal      |
++-------+-------+---------+--------+----------+
+|   112 | mohan | manager | 192125 | 10000.00 |
++-------+-------+---------+--------+----------+
+1 row in set (0.00 sec)
+
+mysql> insert into db.employee2 values(102,'khan','employee',"182125","1000");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into db.employee2 values(108,'bahan','employee',"182135","1000");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from db.employee2;
++-------+-------+----------+--------+----------+
+| empno | ename | job      | deptno | sal      |
++-------+-------+----------+--------+----------+
+|   112 | mohan | manager  | 192125 | 10000.00 |
+|   102 | khan  | employee | 182125 |  1000.00 |
+|   108 | bahan | employee | 182135 |  1000.00 |
++-------+-------+----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> update db.employee2 set sal=15000 where empno=112;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from db.employee2;
++-------+-------+----------+--------+----------+
+| empno | ename | job      | deptno | sal      |
++-------+-------+----------+--------+----------+
+|   112 | mohan | manager  | 192125 | 15000.00 |
+|   102 | khan  | employee | 182125 | 15000.00 |
+|   108 | bahan | employee | 182135 | 15000.00 |
++-------+-------+----------+--------+----------+
+3 rows in set (0.00 sec)
+
+mysql> create table db.pseudo(pseudo int(3),pseudoname char(10),pseudodeptno int(4));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> insert into db.pseudo values(99,'lux',"132");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into db.pseudo values(120,'puma',"142");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into db.pseudo values(130,'bata',"152");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from db.pseudo;
++--------+------------+--------------+
+| pseudo | pseudoname | pseudodeptno |
++--------+------------+--------------+
+|     99 | lux        |          132 |
+|    120 | puma       |          142 |
+|    130 | bata       |          152 |
++--------+------------+--------------+
+3 rows in set (0.00 sec)
+
+mysql> alert table db.employee2 drop column empno,deptno,sal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table db.employee2 drop column empno,deptno,sal' at line 1
+mysql> alert table db.employee2 drop column empno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table db.employee2 drop column empno' at line 1
+mysql> alert table db.employee2 drop column sal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'alert table db.employee2 drop column sal' at line 1
+mysql> alter table db.employee2 drop column empno,deptno,sal;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'deptno,sal' at line 1
+mysql> alter table db.employee2 drop column empno;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table db.employee2 drop column deptno;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table db.employee2 drop column sal;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from db.employee2;
++-------+----------+
+| ename | job      |
++-------+----------+
+| mohan | manager  |
+| khan  | employee |
+| bahan | employee |
++-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> insert into db.employee2 values('sai','leature');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from db.employee2;
++-------+----------+
+| ename | job      |
++-------+----------+
+| mohan | manager  |
+| khan  | employee |
+| bahan | employee |
+| sai   | leature  |
++-------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete  from db.employee2 where ename='sai';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from db.employee2;
++-------+----------+
+| ename | job      |
++-------+----------+
+| mohan | manager  |
+| khan  | employee |
+| bahan | employee |
++-------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select db.employee2 from deptno where deptno=30;
+ERROR 1046 (3D000): No database selected
+mysql> insert into db.employee2 values(111,'charan','principal',"30","10000");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> create table db.employee2(empno int(3),ename char(10),job char(10),deptno int(5),sal float(7,2));
+ERROR 1050 (42S01): Table 'employee2' already exists
+mysql> create table db.employee1(empno int(3),ename char(10),job char(10),deptno int(5),sal float(7,2));
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> insert into db.employee1 values(112,'mohan','manager',"192125","10000");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into db.employee1 values(112,'msai','manager',"182122","10000");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from db.employee1;
++-------+-------+---------+--------+----------+
+| empno | ename | job     | deptno | sal      |
++-------+-------+---------+--------+----------+
+|   112 | mohan | manager | 192125 | 10000.00 |
+|   112 | msai  | manager | 182122 | 10000.00 |
++-------+-------+---------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from db.employee1 order by deptno;
++-------+-------+---------+--------+----------+
+| empno | ename | job     | deptno | sal      |
++-------+-------+---------+--------+----------+
+|   112 | msai  | manager | 182122 | 10000.00 |
+|   112 | mohan | manager | 192125 | 10000.00 |
++-------+-------+---------+--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select deptno from db.employee1;
++--------+
+| deptno |
++--------+
+| 192125 |
+| 182122 |
++--------+
+2 rows in set (0.00 sec)
+
+m

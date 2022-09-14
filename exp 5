@@ -1,0 +1,57 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| delete             |
+| information_schema |
+| kalyan             |
+| kushal             |
+| mysql              |
+| new_schema         |
+| performance_schema |
+| ravi               |
+| sai                |
+| sys                |
+| uvuywgc            |
++--------------------+
+12 rows in set (0.00 sec)
+mysql> create table db.tickets(ticketno  int(9),journe date,age int(4),sex char(5),source varchar(10),destination varchar(10),deptime varchar(10),busno int(10));
+Query OK, 0 rows affected, 3 warnings (0.04 sec)
+mysql> insert into db.tickets values(19211,"2020-06-12","18",'male',"london","pairs",'16','2160');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into db.tickets values(19211,"2020-07-16","17",'male',"pairs","london",'19','2166');
+Query OK, 1 row affected (0.02 sec)
+mysql> insert into db.tickets values(19211,"2021-11-23","27",'femal',"india","america",'19','2156');
+Query OK, 1 row affected (0.02 sec)
+
+
+
+mysql> select * from db.tickets;
++----------+------------+------+-------+--------+-------------+---------+-------+
+| ticketno | journe     | age  | sex   | source | destination | deptime | busno |
++----------+------------+------+-------+--------+-------------+---------+-------+
+|    19211 | 2020-06-12 |   18 | male  | london | pairs       | 16      |  2160 |
+|    19211 | 2020-07-16 |   17 | male  | pairs  | london      | 19      |  2166 |
+|    19211 | 2021-11-23 |   27 | femal | india  | america     | 19      |  2156 |
++----------+------------+------+-------+--------+-------------+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select ticketno,journe,age,source,destination,deptime,busno from db.tickets where sex='male';
++----------+------------+------+--------+-------------+---------+-------+
+| ticketno | journe     | age  | source | destination | deptime | busno |
++----------+------------+------+--------+-------------+---------+-------+
+|    19211 | 2020-06-12 |   18 | london | pairs       | 16      |  2160 |
+|    19211 | 2020-07-16 |   17 | pairs  | london      | 19      |  2166 |
++----------+------------+------+--------+-------------+---------+-------+
+2 rows in set (0.00 sec)
+mysql> select source,destination from db.tickets where deptime>16;
++--------+-------------+
+| source | destination |
++--------+-------------+
+| pairs  | london      |
+| india  | america     |
++--------+-------------+
+2 rows in set (0.02 sec)
+
+mysql>

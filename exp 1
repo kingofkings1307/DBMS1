@@ -1,0 +1,16 @@
+QUERIES INVOLVED IN DDL COMMANDS- CREATE,ALTER,DROP.
+
+create table db.employee1(empno int(4),ename char(20),deptno int(4));
+insert into db.employee1 values(111,'kakashi',"199991");
+insert into db.employee1 values(121,'eleven',"199921");
+insert into db.employee1 values(131,'benchoo',"188881");
+insert into db.employee1 values(141,'mcbc',"166661");
+select * from db. employee1;
+describe db.employee1;
+alter table db.employee1 add sal float(7,2);
+describe db.employee1;
+alter table db.employee1 modify ename varchar(15);
+descibe db.employee1;
+truncate db.employee1;
+select * from db.employee1;
+delete table db.employee1;

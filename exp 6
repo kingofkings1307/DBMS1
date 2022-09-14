@@ -1,0 +1,122 @@
+mysql> create table db.emp3(sal int(8));
+ERROR 1050 (42S01): Table 'emp3' already exists
+mysql> create table db.emp4(sal int(8));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into db.emp4 values("100000");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp4 values("105370");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp4 values("162470");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp4 values("4562470");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp4 values("4560");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp4 values("45686");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from db.emp4;
++---------+
+| sal     |
++---------+
+|  100000 |
+|  105370 |
+|  162470 |
+| 4562470 |
+|    4560 |
+|   45686 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from db.emp4 order by sal;
++---------+
+| sal     |
++---------+
+|    4560 |
+|   45686 |
+|  100000 |
+|  105370 |
+|  162470 |
+| 4562470 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select * from db.emp4 order by column desc;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column desc' at line 1
+mysql> select * from db.emp4 order by sal desc;
++---------+
+| sal     |
++---------+
+| 4562470 |
+|  162470 |
+|  105370 |
+|  100000 |
+|   45686 |
+|    4560 |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> create table db.customer(customerid int(9),cname varchar(10),contactno int(10),address varchar(20),city varchar(10),postalcode int(9),country varchar(9);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table db.customer(customerid int(9),cname varchar(10),contactno int(10),address varchar(20),city varchar(10),postalcode int(9),country varchar(9));
+Query OK, 0 rows affected, 3 warnings (0.03 sec)
+
+mysql> insert into db.customer values(121,'charan',"994966",'item','rome',"753",'italy'),
+    -> insert into db.customer values(121,'charan',"994966",'item','rome',"753",'italy'),
+    -> (122,'itachi',"86643",'nfd','gfgdf',"8665",'india'),
+    -> (132,'itachkhi',"8675443",'nfgv','ggtgdf',"8695",'india');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'insert into db.customer values(121,'charan',"994966",'item','rome',"753",'italy'' at line 2
+mysql> insert into db.customer values(121,'charan',"994966",'item','rome',"753",'italy');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.customer values(121,'charan',"994966",'item','rome',"753",'italy');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.customer values(151,'ctddgn',"9947656",'itgfm','rgfdme',"783",'ihjhft');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.customer values(151,'ctddgn',"9947656",'itgfm','rgfdme',"783",'ihjhft');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.customer values(161,'ctddjgn',"99486656",'itgggm','rgfdmhg',"793",'ihjhft');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> select * from db.customer;
++------------+---------+-----------+---------+---------+------------+---------+
+| customerid | cname   | contactno | address | city    | postalcode | country |
++------------+---------+-----------+---------+---------+------------+---------+
+|        121 | charan  |    994966 | item    | rome    |        753 | italy   |
+|        121 | charan  |    994966 | item    | rome    |        753 | italy   |
+|        151 | ctddgn  |   9947656 | itgfm   | rgfdme  |        783 | ihjhft  |
+|        151 | ctddgn  |   9947656 | itgfm   | rgfdme  |        783 | ihjhft  |
+|        161 | ctddjgn |  99486656 | itgggm  | rgfdmhg |        793 | ihjhft  |
++------------+---------+-----------+---------+---------+------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select customerid,cname,contactno,address,city,postalcode from db.customer where country='italy';
++------------+--------+-----------+---------+------+------------+
+| customerid | cname  | contactno | address | city | postalcode |
++------------+--------+-----------+---------+------+------------+
+|        121 | charan |    994966 | item    | rome |        753 |
+|        121 | charan |    994966 | item    | rome |        753 |
++------------+--------+-----------+---------+------+------------+
+2 rows in set (0.01 sec)
+
+mysql> select count(cusomerid),country from db.customers group by country;
+ERROR 1146 (42S02): Table 'db.customers' doesn't exist
+mysql> select count(cusomerid),country from db.customer group by country;
+ERROR 1054 (42S22): Unknown column 'cusomerid' in 'field list'
+mysql> select count(121),country from db.customer group by country;
++------------+---------+
+| count(121) | country |
++------------+---------+
+|          2 | italy   |
+|          3 | ihjhft  |
++------------+---------+
+2 rows in set (0.01 sec)

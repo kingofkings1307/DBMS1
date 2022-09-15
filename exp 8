@@ -1,0 +1,228 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| db                 |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table db.emp9(eno int(9),ename char(20),deptno int(9));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> insert into db.emp9 values(111,'charan',"20");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp9 values(112,'benda',"30");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp9 values(122,'vankai',"16");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp9 values(132,'kai',"10");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into db.emp9 values(135,'keami',"9");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from db.emp9;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
+|  132 | kai    |     10 |
+|  135 | keami  |      9 |
++------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> describe db.emp9;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| eno    | int      | YES  |     | NULL    |       |
+| ename  | char(20) | YES  |     | NULL    |       |
+| deptno | int      | YES  |     | NULL    |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create index eno on db.emp9;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create index eno on db.emp9(eno);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe db.emp9;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| eno    | int      | YES  | MUL | NULL    |       |
+| ename  | char(20) | YES  |     | NULL    |       |
+| deptno | int      | YES  |     | NULL    |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create index deptno on db.emp9(deptno);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe db.emp9;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| eno    | int      | YES  | MUL | NULL    |       |
+| ename  | char(20) | YES  |     | NULL    |       |
+| deptno | int      | YES  | MUL | NULL    |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> drop index db.emp9.eno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '.emp9.eno' at line 1
+mysql> alter table db.emp9 drop index eno;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe db.emp9;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| eno    | int      | YES  |     | NULL    |       |
+| ename  | char(20) | YES  |     | NULL    |       |
+| deptno | int      | YES  | MUL | NULL    |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table db.emp9 drop index deptno;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe db.emp9;
++--------+----------+------+-----+---------+-------+
+| Field  | Type     | Null | Key | Default | Extra |
++--------+----------+------+-----+---------+-------+
+| eno    | int      | YES  |     | NULL    |       |
+| ename  | char(20) | YES  |     | NULL    |       |
+| deptno | int      | YES  |     | NULL    |       |
++--------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from db.emp9;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
+|  132 | kai    |     10 |
+|  135 | keami  |      9 |
++------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select "ename" from db.emp9;
++-------+
+| ename |
++-------+
+| ename |
+| ename |
+| ename |
+| ename |
+| ename |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select "ename" from db.emp9;
++-------+
+| ename |
++-------+
+| ename |
+| ename |
+| ename |
+| ename |
+| ename |
++-------+
+5 rows in set (0.00 sec)
+
+mysql> select ename from db.emp9;
++--------+
+| ename  |
++--------+
+| charan |
+| benda  |
+| vankai |
+| kai    |
+| keami  |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select * from db.emp9 where deptno between 15 and 30;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+mysql> insert into db.emp9
+    -> (eno,ename,deptno)values(142,'pirel',"27");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from db.emp9;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
+|  132 | kai    |     10 |
+|  135 | keami  |      9 |
+|  142 | pirel  |     27 |
++------+--------+--------+
+6 rows in set (0.00 sec)
+
+mysql> update db.emp9 set ename=dname where condition;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'condition' at line 1
+mysql> update db.emp9 set ename=dname where eno=111;
+ERROR 1054 (42S22): Unknown column 'dname' in 'field list'
+mysql> update db.emp9 set kai=kamal where eno=132;
+ERROR 1054 (42S22): Unknown column 'kai' in 'field list'
+mysql> update db.emp9 set ename=kamal where eno=132;
+ERROR 1054 (42S22): Unknown column 'kamal' in 'field list'
+mysql> update db.emp9 set ename='kamal' where eno=132;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from db.emp9;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
+|  132 | kamal  |     10 |
+|  135 | keami  |      9 |
+|  142 | pirel  |     27 |
++------+--------+--------+
+6 rows in set (0.00 sec)
+
+mysql> delete from db.emp9 where ename='pirel';
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from db.emp9;
++------+--------+--------+
+| eno  | ename  | deptno |
++------+--------+--------+
+|  111 | charan |     20 |
+|  112 | benda  |     30 |
+|  122 | vankai |     16 |
+|  132 | kamal  |     10 |
+|  135 | keami  |      9 |
++------+--------+--------+
+5 rows in set (0.00 sec)
+
+mysql>
